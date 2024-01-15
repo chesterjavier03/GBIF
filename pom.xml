@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.gbif</groupId>
+        <artifactId>motherpom</artifactId>
+        <version>58-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.gbif.data</groupId>
+    <artifactId>gbif-pipeline-test</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>GBIF Data Pipeline Test</name>
+    <description>Sample project to test and showcase Apache Beam with Spring Boot</description>
+
+    <repositories>
+        <repository>
+            <id>gbif-all</id>
+            <url>https://repository.gbif.org/content/groups/gbif</url>
+        </repository>
+    </repositories>
+
+    <modules>
+        <module>beam-data-pipeline</module>
+        <module>data-service</module>
+
+    </modules>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <jdkLevel>17</jdkLevel>
+
+        <!-- Dependencies -->
+        <apache.beam.version>2.53.0</apache.beam.version>
+        <avro.version>1.8.2</avro.version>
+        <snappy-java.version>1.1.10.4</snappy-java.version>
+
+        <!-- Plugins -->
+        <build-helper-maven.version>3.5.0</build-helper-maven.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.xerial.snappy</groupId>
+                <artifactId>snappy-java</artifactId>
+                <version>${snappy-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.beam</groupId>
+                <artifactId>beam-sdks-java-core</artifactId>
+                <version>${apache.beam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.beam</groupId>
+                <artifactId>beam-runners-direct-java</artifactId>
+                <version>${apache.beam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.beam</groupId>
+                <artifactId>beam-sdks-java-extensions-avro</artifactId>
+                <version>${apache.beam.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.avro</groupId>
+                    <artifactId>avro-maven-plugin</artifactId>
+                    <version>${avro.version}</version>
+                </plugin>
+                <!-- Add the generated sources to the classpath for IDEs -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

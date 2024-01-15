@@ -1,0 +1,22 @@
+/**
+ * Simple records of observation.
+ */
+[
+  {
+    "name": "Observation",
+    "namespace": "org.gbif.demo.io.avro",
+    "type": "record",
+    "fields": [
+      {"name": "occurrenceID", "type": ["null", "string"], "default" : null },
+      {"name": "kingdom", "type": ["null", "string"], "default" : null },
+      {"name": "phylum", "type": ["null", "string"], "default" : null },
+      {"name": "class", "type": ["null", "string"], "default" : null },
+      {"name": "order", "type": ["null", "string"], "default" : null },
+      {"name": "family", "type": ["null", "string"], "default" : null },
+      {"name": "genus", "type": ["null", "string"], "default" : null },
+      {"name": "scientificName", "type": ["null", "string"], "default" : null },
+      {"name": "decimalLatitude", "type": ["null", "double"], "default" : null },
+      {"name": "decimalLongitude", "type": ["null", "double"], "default" : null }
+    ]
+  }
+]
