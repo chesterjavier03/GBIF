@@ -14,7 +14,7 @@ Running the project should be as simple as running the `CSV2AvroPipeline` class.
 The programming task is to extend this project to add a new field of `countryCode` to the data stored in the avro file.
 
 To populate this field a call to the GBIF reverse geocode web service should be performed.  The service takes a 
-latitude and longitude and returns JSON containing the code in the field `isoCountryCode2Digit`.  A sample call is 
- <http://api.gbif.org/v1/geocode/reverse?lat=60.4&lng=-131.3>.
+latitude and longitude and returns JSON containing the code in the field `isoCountryCode2Digit` from the object where type = "Political".  
+A sample call is <http://api.gbif.org/v1/geocode/reverse?lat=60.4&lng=-131.3>.
 
 
