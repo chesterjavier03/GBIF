@@ -4,7 +4,7 @@
 [
   {
     "name": "Observation",
-    "namespace": "org.gbif.demo.io.avro",
+    "namespace": "org.gbif.data.pipelines.io.avro",
     "type": "record",
     "fields": [
       {"name": "occurrenceID", "type": ["null", "string"], "default" : null },

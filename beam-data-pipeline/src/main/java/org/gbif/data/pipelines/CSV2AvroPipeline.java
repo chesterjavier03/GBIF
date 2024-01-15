@@ -2,6 +2,7 @@ package org.gbif.data.pipelines;
 
 import org.apache.beam.sdk.extensions.avro.coders.AvroCoder;
 import org.apache.beam.sdk.extensions.avro.io.AvroIO;
+import org.apache.beam.sdk.transforms.DoFn;
 import org.gbif.data.pipelines.io.avro.Observation;
 
 import org.apache.beam.runners.direct.DirectRunner;
@@ -9,12 +10,11 @@ import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
 import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
-import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.values.PCollection;
 
 /**
- * A demonstration piple showcasing how to convert a simple CSV textfile into an Avro file.
+ * A demonstration pipeline showcasing how to convert a simple CSV textfile into an Avro file.
  */
 public class CSV2AvroPipeline {
 
