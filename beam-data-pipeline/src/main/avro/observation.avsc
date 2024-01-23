@@ -16,7 +16,8 @@
       {"name": "genus", "type": ["null", "string"], "default" : null },
       {"name": "scientificName", "type": ["null", "string"], "default" : null },
       {"name": "decimalLatitude", "type": ["null", "double"], "default" : null },
-      {"name": "decimalLongitude", "type": ["null", "double"], "default" : null }
+      {"name": "decimalLongitude", "type": ["null", "double"], "default" : null },
+      {"name": "countryCode", "type": ["null", "string"], "default" : null }
     ]
   }
 ]
