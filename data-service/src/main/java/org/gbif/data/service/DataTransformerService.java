@@ -26,7 +26,7 @@ public class DataTransformerService {
     try {
       File convertedFile =  convertMultipartFile(inputFile);
       if(convertedFile.exists()) {
-        CSV2AvroPipelineService.generateAvroFiles(convertMultipartFile(inputFile));
+        CSV2AvroPipelineService.generateAvroFiles(convertedFile);
         new ZipFile(Commons.ZIP_AVRO_FILE).addFolder(new File(Commons.AVRO_DIR));
       }
     } catch (IOException e) {
@@ -36,9 +36,10 @@ public class DataTransformerService {
 
   private File convertMultipartFile(MultipartFile file) throws IOException {
     File convFile = new File(file.getOriginalFilename());
-    FileOutputStream fos = new FileOutputStream(convFile);
-    fos.write( file.getBytes());
-    fos.close();
+    try (FileOutputStream fos = new FileOutputStream(convFile)) {
+      fos.write(file.getBytes());
+      fos.close();
+    }
     return convFile;
   }
 }

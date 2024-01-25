@@ -1,13 +1,14 @@
 package org.gbif.data.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import lombok.extern.slf4j.Slf4j;
 import net.lingala.zip4j.ZipFile;
 import org.gbif.data.service.DataTransformerService;
 import org.gbif.data.utility.Commons;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpStatus;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,12 +30,17 @@ public class DataTransformerController {
   }
 
   @PostMapping(value = "/transform", produces= MediaType.APPLICATION_OCTET_STREAM_VALUE)
-  public ResponseEntity transformDataZip(@RequestParam("file") MultipartFile file) {
+  public ResponseEntity<byte[]> transformDataZip(@RequestParam("file") MultipartFile file) {
     dataTransformerService.generateTransformedDataFiles(file);
-    var zip = new ZipFile(Commons.ZIP_AVRO_FILE);
-    if(!zip.getFile().exists())
-      return new ResponseEntity(HttpStatus.NO_CONTENT);
-    return ResponseEntity.ok()
-        .body(new FileSystemResource(Paths.get(zip.getFile().toURI())));
+    try (var zip = new ZipFile(Commons.ZIP_AVRO_FILE)) {
+      if (!zip.getFile().exists()) {
+        return ResponseEntity.noContent().build();
+      }
+      return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).body(
+          new ByteArrayResource(Files.readAllBytes(Paths.get(zip.getFile().toURI())))
+              .getByteArray());
+    } catch (IOException e) {
+      return ResponseEntity.internalServerError().build();
+    }
   }
 }
